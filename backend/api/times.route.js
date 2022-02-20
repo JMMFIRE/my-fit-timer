@@ -1,7 +1,7 @@
 import express from "express"
-
+import TimesCtrl from "./times.controller.js"
 const router = express.Router()
 
-router.route("/").get((req, res) => res.send("test this route"))
+router.route("/").get(TimesCtrl.apiGetTimes)
 
 export default router
