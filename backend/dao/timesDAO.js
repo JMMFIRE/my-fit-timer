@@ -1,3 +1,6 @@
+import mongodb from "mongodb"
+const ObjectId = mongodb.ObjectId
+
 let times
 
 export default class TimesDAO {
@@ -46,4 +49,32 @@ export default class TimesDAO {
             return { timesList: [], totalNumTimes: 0 }
         }
     }
-}
+
+    static async addTime(name, startTime, endTime, difference) {
+        try {
+            const timeDoc = {
+                name: name,
+                startTime: startTime,
+                endTime: endTime,
+                difference: difference,
+            }
+            return await times.insertOne(timeDoc)
+        } catch (e) {
+            console.error(`Unable to post time: ${e}`)
+            return { error: e }
+        }
+    }
+
+    static async deleteTime(timeId) {
+        try {
+            const deleteResponse = await times.deleteOne({
+                _id: ObjectId(timeId)
+            })
+
+            return deleteResponse
+        } catch (e) {
+            console.error(`Unable to delete time: ${e}`)
+            return { error: e }
+        }
+    }
+} //

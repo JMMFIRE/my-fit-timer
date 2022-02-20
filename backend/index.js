@@ -10,7 +10,7 @@ const port = process.env.PORT || 8000
 MongoClient.connect(
     process.env.TIMES_DB_URI,
     {
-        wtimeout: 2500,
+        wtimeoutMS: 2500,
     }
 )
 .catch(err => {

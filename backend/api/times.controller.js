@@ -24,4 +24,37 @@ export default class TimesController {
         }
         res.json(response)
     }
+
+    static async apiPostTime(req, res, next) {
+        try {
+            const name = req.body.name
+            const startTime = req.body.startTime
+            const endTime = req.body.endTime
+            const difference = req.body.difference
+
+            const TimeResponse  = await TimesDAO.addTime(
+                name, 
+                startTime, 
+                endTime, 
+                difference,
+            )
+            res.json({ status: "success" })
+        } catch (e) {
+            res.status(500).json({ error: e.message, TimeResponse })
+        }
+    }
+
+    static async apiDeleteTime(req, res, next) {
+        try {
+           const timeId = req.body.id
+           console.log(timeId)
+           const timeResponse = await TimesDAO.deleteTime(
+               timeId
+           )
+           res.json({ status: "success" })
+        } catch (e) {
+            res.status(500).json({ error: e.message })
+        }
+        
+    }
 }
