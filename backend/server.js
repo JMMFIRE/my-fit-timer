@@ -10,6 +10,8 @@ app.use(cors())
 app.use(express.json())
 
 app.use("/api/v1/times", times)
-app.use("*", (req, res) => res.status(404).json({error: "Not found"}))
+app.get('/', (req, res) => {
+    res.sendFile('public/index.html', { root: '.' });
+})
 
 export default app 
