@@ -46,7 +46,7 @@ export default class TimesController {
 
     static async apiDeleteTime(req, res, next) {
         try {
-           const timeId = req.body.id
+           const timeId = req.query.id
            console.log(timeId)
            const timeResponse = await TimesDAO.deleteTime(
                timeId
