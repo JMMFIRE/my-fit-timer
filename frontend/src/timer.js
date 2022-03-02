@@ -50,25 +50,11 @@ class timer extends Component {
             })
     }
     
-    startTick = e => {
-        e.preventDefault()
+    startTick () {
         this.state.seconds = 0;
         // start timer after button is clicked
-        this.interval = setInterval(() => {
-            this.setState(prevState => ({
-                seconds: prevState.seconds + 1
-            }));
-        }, 1000);
-        console.log(this.state)
-    }
 
-    endTick() {
-        // start timer after button is clicked
-        this.interval = setInterval(() => {
-            this.setState(prevState => ({
-                seconds: 0
-            }));
-        }, 1000);
+        
 
         axios.post('http://localhost:5000/api/v1/times', this.state.seconds)
             .then(response => {
@@ -77,7 +63,14 @@ class timer extends Component {
             .catch(error => {
                 console.log(error)
             })
-        console.log(this.state)
+    }
+
+    endTick() {
+        // start timer after button is clicked
+        
+        /*if (this.state.posts.times.length > 7) {
+            this.state.posts.times.length = 0;
+        }*/
 
         axios.get('http://localhost:5000/api/v1/times')
             .then(response => {
@@ -114,7 +107,7 @@ class timer extends Component {
                             {this.state.posts && Object.keys(this.state.posts).map((issue, i) =>
                                 (
                                     <li key={i}>
-                                        {i}: {this.state.posts.time}
+                                        {1+ i}: { posts.times[2+i].difference }
                                     </li>
                                 ))}
                         </ul>
